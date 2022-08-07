@@ -1,0 +1,86 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+class Rank
+{
+public:
+    typedef struct{
+      string strName;
+      unsigned int nScore;
+      unsigned int nTotal;
+    }Info;
+  
+public:
+    static std::string nthRank(const std::string &st, std::vector<int> &we, int n);
+    static std::vector<string> split(string str, char Delimiter);
+    static bool CompareStruct(Info Src, Info Dst);
+};
+
+bool Rank::CompareStruct(Info Src, Info Dst){
+  if(Src.nTotal == Dst.nTotal){
+    return Src.strName < Dst.strName;
+  }
+  else
+    return Src.nTotal > Dst.nTotal;
+}
+
+std::vector<string> Rank::split(string str, char Delimiter){
+  istringstream iss(str);
+  string buffer;
+  
+  vector<string> result;
+  
+  while(getline(iss, buffer, Delimiter)){
+    result.push_back(buffer);
+  }
+  
+  return result;
+}
+
+std::string Rank::nthRank(const std::string &st, std::vector<int> &we, int n){
+  std::string strResult;
+  int nStringSize = st.size();
+  
+  if(nStringSize == 0){
+    strResult = "No participants";
+    return strResult;
+  }
+  
+  vector<string> VecstrEachName;
+  VecstrEachName = split(st, ',');
+  
+  if(n > VecstrEachName.size()){
+    strResult = "Not enough participants";
+    return strResult;
+  }
+  
+  vector<Info> VecInfo;
+  for(int index = 0; index < VecstrEachName.size(); index++){
+    Info Temp;
+    Temp.strName = VecstrEachName[index];
+    
+    int nTemp = 0;
+    for(int inner = 0; inner < VecstrEachName[index].size(); inner++){
+      if(VecstrEachName[index][inner] < 91)
+        nTemp += VecstrEachName[index][inner] - 64;
+      else if(VecstrEachName[index][inner] > 91)
+        nTemp += VecstrEachName[index][inner] - 96;
+    }
+    Temp.nScore = nTemp + Temp.strName.size();
+    Temp.nTotal = Temp.nScore * we[index];
+    VecInfo.push_back(Temp);
+  }
+  
+  sort(VecInfo.begin(), VecInfo.end(), CompareStruct);
+  
+  for(int index = 0; index < VecInfo.size(); index++){
+    cout << "Name : " << VecInfo[index].strName << "  Score : " << VecInfo[index].nScore << "  Total : " << VecInfo[index].nTotal << endl;
+  }
+  cout << "n : " << n << endl;
+  strResult = VecInfo[n - 1].strName;
+  cout << strResult << endl;
+  cout << VecInfo[n - 1].strName << endl;
+  return strResult;
+}
