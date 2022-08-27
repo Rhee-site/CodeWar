@@ -1,0 +1,36 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class LongestConsec
+{
+public:
+    static std::string longestConsec(std::vector<std::string> &strarr, int k);
+};
+
+std::string LongestConsec::longestConsec(std::vector<std::string> &strarr, int k){
+  if (strarr.size() == 0 || strarr.size() < k || k <= 0)
+    return "";
+  
+  std::string strResult;
+  
+  int nMax = 0;
+  int nStart = 0;
+  for(int index = 0; index < strarr.size() - k + 1; index++){
+    int nSum = 0;
+    for(int nCount = index; nCount < k + index; nCount++){
+      nSum += strarr[nCount].size();
+    }
+    
+    if(nMax < nSum){
+      nStart = index;
+      nMax = nSum;
+    }
+  }
+  
+  for(int index = 0; index < k; index++)
+    strResult += strarr[nStart + index];
+  
+  return strResult;
+}
