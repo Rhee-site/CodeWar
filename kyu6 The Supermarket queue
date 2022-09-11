@@ -1,0 +1,44 @@
+long queueTime(std::vector<int> customers,int n){
+  long lResult = 0;
+  
+  std::vector<int> VecnTime(n, 0);
+  
+  if(customers.size() == 0)
+    return 0;
+  
+  while(true){
+    bool bCheck = true;
+    if(customers.size() == 0){
+      for(int index = 0; index < n; index++){
+        if(VecnTime[index] != 0){
+          bCheck = false;
+          break;
+        }
+      }
+    }
+    else{
+      bCheck = false;
+    }
+    
+    if(bCheck == true)
+      break;
+    
+    for(int index = 0; index < n; index++){
+      if(VecnTime[index] == 0){
+        if(customers.size() != 0){
+          VecnTime[index] = customers.front();
+          customers.erase(customers.begin());
+        }
+      }
+    }
+    
+    for(int index = 0; index < n; index++){
+      if(VecnTime[index] != 0)
+        VecnTime[index]--;
+    }
+    
+    lResult++;
+  }
+  
+  return lResult;
+}
