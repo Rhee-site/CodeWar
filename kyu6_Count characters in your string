@@ -1,0 +1,18 @@
+#include <map>
+#include <string>
+#include <algorithm>
+
+std::map<char, unsigned> count(const std::string& string) {
+  std::map<char, unsigned> MapResult;  
+  
+  for(int index = 0; index < string.size(); index++){
+    if(MapResult.find(string[index]) == MapResult.end()){
+      MapResult.insert(std::pair<char, unsigned>(string[index], 1));
+    }
+    else{
+      MapResult[string[index]]++;
+    }
+  }
+  
+  return MapResult;
+}
