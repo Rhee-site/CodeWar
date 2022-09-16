@@ -1,0 +1,50 @@
+int countSmileys(std::vector<std::string> arr)
+{
+  int nResult = 0;
+  
+  for(auto src : arr){
+    if(src.size() == 2){
+      bool bCheckEye = false;
+      if(src.front() == ':' || src.front() == ';'){
+        bCheckEye = true;
+      }
+      
+      bool bCheckMouth = false;
+      if(src.back() == ')' || src.back() == 'D'){
+        bCheckMouth = true;
+      }
+      
+      if(bCheckEye == true){
+        if(bCheckMouth == true){
+          nResult++;
+        }
+      }
+    }
+    else if(src.size() == 3){
+      bool bCheckEye = false;
+      if(src.front() == ':' || src.front() == ';'){
+        bCheckEye = true;
+      }
+      
+      bool bCheckMouth = false;
+      if(src.back() == ')' || src.back() == 'D'){
+        bCheckMouth = true;
+      }
+      
+      bool bCheckNose = false;
+      if(src[1] == '-' || src[1] == '~'){
+        bCheckNose = true;
+      }
+      
+      if(bCheckEye == true){
+        if(bCheckMouth == true){
+          if(bCheckNose == true){
+            nResult++; 
+          }
+        }
+      }
+    }
+  }
+  
+  return nResult;
+}
