@@ -1,0 +1,33 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterable){
+  //your code here
+  std::vector<T> VecTResult;
+  VecTResult.push_back(iterable.front());
+    
+  for(auto index : iterable)
+    if(VecTResult.back() != index)
+      VecTResult.push_back(index);
+  
+  return VecTResult;
+}
+
+std::vector<char> uniqueInOrder(const std::string& iterable){
+  //your code here
+  std::vector<char> VecChResult;
+  
+  if(iterable.size() == 0)
+    return VecChResult;
+  
+  VecChResult.push_back(iterable.front());
+  
+   for(auto index : iterable){
+     if(VecChResult.back() != index){
+        VecChResult.push_back(index);
+      }
+   }
+  
+  return VecChResult;
+}
