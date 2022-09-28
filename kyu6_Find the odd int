@@ -1,0 +1,30 @@
+#include <vector>
+#include <map>
+#include <algorithm>
+
+int findOdd(const std::vector<int>& numbers){
+  //your code here
+  std::map<int, int> MapResult;  
+  for(int index = 0; index < numbers.size(); index++){
+     if(MapResult.find(numbers[index]) == MapResult.end()){
+        MapResult.insert(std::pair<int, int>(numbers[index], 1));
+     }
+    else{
+      MapResult[numbers[index]]++;
+    }
+  }
+  
+  
+  int nResult = 0;
+  int nValue = 0;
+  for(auto iter = MapResult.begin(); iter != MapResult.end(); iter++){
+     if(iter->second % 2 != 0){
+       if(nValue < iter->second){
+         nResult = iter->first;
+         nValue = iter->second;
+       }
+     }
+  }
+  
+  return nResult;
+}
