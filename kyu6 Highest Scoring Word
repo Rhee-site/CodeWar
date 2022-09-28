@@ -1,0 +1,48 @@
+#include <string>
+#include <map>
+#include <algorithm>
+
+std::string highestScoringWord(const std::string &str)
+{
+  std::string strResult = "magic";
+  std::map<std::string, int> MapResult;
+  std::string strTemp;
+  for(int index = 0; index < str.size(); index++){
+    if(str[index] != ' '){
+      strTemp += str[index];
+    }
+    else{
+      int nValue = 0;
+      for(int i = 0; i < strTemp.size(); i++){
+        nValue += strTemp[i];
+      }
+      nValue -= (96 * strTemp.size());
+      
+      if(MapResult.find(strTemp) == MapResult.end()){
+        MapResult.insert(std::pair<std::string, int>(strTemp, nValue));
+      }
+      strTemp.clear();
+    }
+  }
+  
+  int nValue = 0;
+  for(int i = 0; i < strTemp.size(); i++){
+    nValue += strTemp[i];
+  }
+  nValue -= (96 * strTemp.size());
+      
+  if(MapResult.find(strTemp) == MapResult.end()){
+    MapResult.insert(std::pair<std::string, int>(strTemp, nValue));
+  }
+  strTemp.clear();
+  
+  int nResult = 0;
+  for(auto iter = MapResult.begin(); iter != MapResult.end(); iter++){
+    if(nResult < iter->second){
+      nResult = iter->second;
+      strResult = iter->first;
+    }
+  }
+  
+  return strResult;
+}
