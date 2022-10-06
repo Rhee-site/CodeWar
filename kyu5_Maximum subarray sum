@@ -1,0 +1,38 @@
+#include <vector>
+#include <algorithm>
+
+bool PreCheck(const std::vector<int>& arr){
+  if(arr.size() == 0){
+    return false; 
+  }
+  else{
+    for(int index = 0; index < arr.size(); index++){
+      if(arr[index] > 0){
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
+int maxSubArray(const std::vector<int>& arr){
+  int nMax = arr.front();
+  int nTempMax = arr.front();
+  
+  for(int index = 1; index < arr.size(); index++){
+    nTempMax = std::max(nTempMax + arr[index], arr[index]);
+    nMax = std::max(nTempMax, nMax);
+  }
+  
+  return nMax;
+}
+
+int maxSequence(const std::vector<int>& arr){
+  int nResult = 0;
+  
+  if(PreCheck(arr) == true){
+    nResult = maxSubArray(arr);
+  }
+
+  return nResult;
+}
