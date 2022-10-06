@@ -1,0 +1,23 @@
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Same {
+public :
+    static bool comp(std::vector<int>&a, std::vector<int>&b) {
+      if(a.size() != b.size())
+        return false;
+      
+      for(int index = 0; index < a.size(); index++){
+        long long Temp = a[index] * a[index];
+        if(find(b.begin(), b.end(), Temp) != b.end())
+          b.erase(b.begin() + (find(b.begin(), b.end(), Temp) - b.begin()));
+      }
+      
+      if(b.size() == 0)
+        return true;
+      
+      return false;
+    }
+};
