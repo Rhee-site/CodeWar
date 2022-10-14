@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+class DigPow
+{
+public:
+  static int digPow(int n, int p);
+};
+
+int DigPow::digPow(int n, int p){
+  int nResult = -1;
+  
+  string strSrc = to_string(n);
+  int nTemp = 0;
+  for(int index = 0; index < strSrc.size(); index++){
+    string strTemp;
+    strTemp = strSrc[index];
+    nTemp += pow(stoi(strTemp), p);
+    p++;
+  }
+  
+  if(nTemp % n == 0)
+    return nTemp / n;
+  else 
+    return nResult;
+}
