@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int persistence(long long n){
+  int nResult = 0;
+  
+  string strSrc = to_string(n);
+  
+  while(strSrc.size() != 1){
+    int nTemp = 0;
+    string strTemp;
+    strTemp = strSrc[0];
+    nTemp = stoi(strTemp);
+    
+    for(int index = 1; index < strSrc.size(); index++){
+      strTemp = strSrc[index];
+      nTemp *= stoi(strTemp);
+    }
+    
+    strSrc = to_string(nTemp);
+    nResult++;
+  }
+  
+  return nResult;
+}
