@@ -1,0 +1,47 @@
+std::string encrypt(std::string text, int n)
+{
+    int nLength = text.length();
+    std::string strOdd = "";
+    std::string strEven = "";
+  
+    if(n <= 0 || nLength == 0){
+        return text;
+    }
+  
+    for(int index = 0; index < nLength; index++){
+        if(index % 2 == 0)
+            strEven += text[index];
+        else
+            strOdd += text[index];
+    }
+  
+    strOdd.append(strEven);
+      
+    if(n == 1)
+        return strOdd;
+    else
+        return encrypt(strOdd, n - 1);
+}
+
+std::string decrypt(std::string encryptedText, int n)
+{
+  int nMid = encryptedText.length() / 2;
+  int nCount = 0;
+  std::string strResult = "";
+  if(n <= 0 || nMid == 0)
+    return encryptedText;
+  
+  int nTemp = encryptedText.length() % 2 == 1 ? nMid + 1 : nMid;
+  
+  for(int index = 0; index < nTemp; index++){
+    strResult += encryptedText[nMid + nCount];
+    if(nCount < nMid)
+      strResult += encryptedText[nCount];
+    nCount++;
+  }
+  
+  if(n == 1)
+    return strResult;
+  else
+    return decrypt(strResult, n - 1);
+}
