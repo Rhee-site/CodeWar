@@ -1,0 +1,14 @@
+std::vector<std::string> wave(std::string y){
+  std::vector<std::string> VecstrResult;
+  
+  for(unsigned long index = 0; index < y.size(); index++){
+    if(y[index] < 'A' || y[index] > 'z')
+      continue;
+    
+    std::string strCopy = y;
+    strCopy[index] -= 32;
+    VecstrResult.push_back(strCopy);
+  }
+  
+  return VecstrResult;
+}
