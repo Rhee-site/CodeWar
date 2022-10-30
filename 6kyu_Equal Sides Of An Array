@@ -1,0 +1,23 @@
+#include <vector>
+using namespace std;
+
+int find_even_index (const vector <int> numbers) {
+  int nSum = 0;
+  int nLeftSum = 0;
+  
+  for(int index = 0; index < numbers.size(); index++){
+    nSum += numbers[index];
+  }
+  
+  if(nSum == 0)
+    return 0;
+  
+  for(int index = 0; index < numbers.size(); index++){
+    nSum -= numbers[index];
+    if(nLeftSum == nSum)
+      return index;
+    nLeftSum += numbers[index];
+  }
+  
+  return -1;
+}
