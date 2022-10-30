@@ -1,0 +1,24 @@
+class Kata
+{
+public:
+    std::vector<int> sortArray(std::vector<int> array)
+    {
+        std::vector<int> VecnTemp;
+        for(int index = 0; index < array.size(); index++){
+          if(array[index] % 2 != 0){
+            VecnTemp.push_back(array[index]);
+            array[index] = -1;
+          }
+        }
+      
+        sort(VecnTemp.begin(), VecnTemp.end());
+      
+        int nIndex = 0;
+        for(int index = 0; index < array.size(); index++){
+          if(array[index] == -1)
+            array[index] = VecnTemp[nIndex++];
+        }
+      
+        return array;
+    }
+};
