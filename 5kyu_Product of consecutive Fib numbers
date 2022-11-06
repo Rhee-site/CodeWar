@@ -1,0 +1,44 @@
+#include <vector>
+typedef unsigned long long ull;
+class ProdFib
+{
+public:
+  static std::vector<ull> productFib(ull prod);
+};
+
+ull Fib(ull n){
+  if(n <= 1)
+    return n;
+  return Fib(n - 1) + Fib(n - 2);
+}
+
+std::vector<ull> ProdFib::productFib(ull prod){
+  ull n = 0;
+  ull Fib1 = 0;
+  ull Fib2 = 0;
+  ull Result = 0;
+  std::vector<ull> VecullResult;
+  
+  while(true){
+    Fib1 = Fib(n);
+    Fib2 = Fib(n + 1);
+    Result = Fib1 * Fib2;
+    if(Result < prod){
+      n++;
+      continue;
+    }
+    else if(Result == prod){
+      VecullResult.push_back(Fib1);
+      VecullResult.push_back(Fib2);
+      VecullResult.push_back(1);
+    }
+    else{
+      VecullResult.push_back(Fib1);
+      VecullResult.push_back(Fib2);
+      VecullResult.push_back(0);
+    }
+    break;
+  }
+  
+  return VecullResult;
+}
