@@ -1,0 +1,26 @@
+#include <string>
+
+std::string alphabet_position(const std::string &text) {
+  std::string strResult = "";
+
+  for(int index = 0; index < text.size(); index++){
+    int nTemp = text[index];
+    if(nTemp > 96 && nTemp < 123){
+      nTemp -= 96;
+      strResult += std::to_string(nTemp);
+      if(index != text.size())
+        strResult += " ";
+    }
+    else if(nTemp > 64 && nTemp < 91){
+      nTemp -= 64;
+      strResult += std::to_string(nTemp);
+      if(index != text.size())
+        strResult += " ";
+    }
+  }
+  
+  if(strResult.empty() == false)
+    strResult.pop_back();
+  
+  return strResult;
+}
