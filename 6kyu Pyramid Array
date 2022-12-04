@@ -1,0 +1,16 @@
+#include <vector>
+#include <cstdlib>
+
+std::vector<std::vector<int>> pyramid(std::size_t n) {
+  std::vector<std::vector<int>> VecVecResult;
+  
+  for(int row = 0; row < n; row++){
+    std::vector<int> Temp;
+    for(int col = 0; col < row + 1; col++){
+      Temp.push_back(1);
+    }
+    VecVecResult.push_back(Temp);
+  }
+  
+  return VecVecResult;
+}
