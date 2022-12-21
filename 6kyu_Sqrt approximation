@@ -1,0 +1,31 @@
+std::vector<int> sqrtApproximation(double number) {
+  std::vector<int> VecnResult;
+  
+  std::cout << number << std::endl;
+  
+  if(number == 1)
+    VecnResult.push_back(1);
+  else{
+    int nLow = 1;
+    int nHigh = number;
+    int nMid = 0;
+    
+    while(nLow < nHigh){
+      nMid = (nLow + nHigh) / 2;
+      if(nMid * nMid == number){
+        VecnResult.push_back(nMid);
+        return VecnResult;
+      }
+      
+      if(nMid * nMid > number)
+        nHigh = nMid;
+      else
+        nLow = nMid + 1;
+    }
+    
+    VecnResult.push_back(nLow - 1);
+    VecnResult.push_back(nLow);
+  }
+  
+  return VecnResult;
+}
